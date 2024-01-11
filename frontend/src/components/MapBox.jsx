@@ -1,6 +1,7 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
+import { Col, Container, Row, Spinner } from 'react-bootstrap';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9oYW1hZG1pcnphZWkiLCJhIjoiY2xyN3YwNHJzMHcwdzJpcDRtd2gyY2czdSJ9.qRpHoLZY-N8zC6Qi195mpw';
 mapboxgl.setRTLTextPlugin(
@@ -10,20 +11,84 @@ mapboxgl.setRTLTextPlugin(
 );
 
 export const Map = () => {
-  useEffect(() => {
+  const [loading , setLoading] = useState(false)
+  const [data , setData] = useState([])
+
+   useEffect(()=>{
+    setLoading(true);
     const map = new mapboxgl.Map({
-      container: 'map-container',
-      style: 'mapbox://styles/mapbox/standard',
+      container : 'map',
+      style: 'mapbox://styles/mapbox/outdoors-v12',
       center: {
         lat : 34.7983 , 
         lon : 48.5148
       }, 
-      zoom: 55, 
-    });
+      zoom: 15})
 
-    return () => map ;
-  }, []);
+      const marker1 = new mapboxgl.Marker({color:'red' , rotation:true})
+      .setLngLat([48.514813,34.798226])
 
-  return <div id="map-container" style={{ width: '100%', height: '500px' }} />;
+      .addTo(map);
+      
+      // Create a default Marker, colored black, rotated 45 degrees.
+      const marker2 = new mapboxgl.Marker({ color: 'red', rotation: 45 })
+      .setLngLat([48.509025 , 34.809037])
+      .addTo(map);
+
+      const marker3 = new mapboxgl.Marker({color:'red', rotation : true})
+        .setLngLat([48.5166382, 34.807235])
+        .addTo(map)
+        .setPopup(
+          new mapboxgl.Popup({ offset: 25 }) 
+          .setHTML(
+          `<h3>موزه حکمتانه</h3><p>$test</p>`
+          )
+          
+        ).getElement().addEventListener('click' , (e)=>{
+          
+        })
+
+    
+      const marker4 = new mapboxgl.Marker({color:'red', rotation : true})
+      .setLngLat([48.5122353 ,  34.7983275])
+      .addTo(map)
+
+      setLoading(false)
+
+
+      const address = [
+        {
+          id : 1 , 
+          lngLat : [48.514813,34.798226] ,
+        
+        }
+      ]
+   })
+
+    return (
+      <>
+        <Container>
+          <Row>
+            <Col>
+              {
+                loading ? (
+                  <>
+                    <Spinner/>
+                  </>
+                ) : (
+                  <>
+                    <div id="map" style={{ height: '100vh', width: '100%' }}></div>
+                  </>
+                )
+              }
+            </Col>
+            <Col>
+              
+              <h1></h1>
+              <p></p>
+            </Col>
+          </Row>
+        </Container>
+      </>
+    )
 };
-
