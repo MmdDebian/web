@@ -1,13 +1,61 @@
+@font-face {
+  font-family: Frederick;
+  src: url(./fonts/Frederick.ttf);
+} ;
+
+@font-face {
+  font-family: KrinkesDecorPERSONAL;
+  src: url(./fonts/KrinkesDecorPERSONAL.ttf);
+} ;
+
+@font-face {
+  font-family: my-font;
+  src: url(./fonts/KrinkesRegularPERSONAL.ttf);
+}
+
+
+@font-face {
+  font-family: font-farsi;
+  src: url(./fonts/Lalezar-Regular.ttf);
+}
+
 body {
+  background-color: rgb(1, 8, 32);  
+  color : rgb(153, 153, 153) !important; 
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: font-farsi !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.navabr { 
+  background-color: rgb(1, 8, 32) !important;   
 }
+
+.nav-link {
+  color : white !important; 
+}
+
+
+.back-color {
+  background-color: rgb(1, 8, 32) !important;   
+}
+
+.text-color {
+  color : rgb(219, 219, 219) !important; 
+}
+
+
+.form-style{
+  background-color: rgb(2, 14, 51) !important;   
+  box-shadow: white 2 2 2 2 ;
+}
+
+
+
+.logo {
+  font-weight: bold;
+  font-family: KrinkesDecorPERSONAL;
+}
+

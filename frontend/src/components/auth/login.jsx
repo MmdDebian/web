@@ -9,30 +9,30 @@ export const Login = ()=>{
       <Container>
         <Row className="vh-100 d-flex justify-content-center align-items-center">
           <Col md={8} lg={6} xs={12}>
-            <Card className="px-4">
+            <Card className="px-4 back-color text-color form-style">
               <Card.Body>
                 <div className="mb-3 mt-md-4">
-                  <h2 className="fw-bold mb-2 text-center text-uppercase ">
-                    Parvaz.
+                  <h2 className="fw-bold mb-2 text-center text-uppercase logo">
+                    Parvaz
                   </h2>
                   <div className="mb-3">
                     <Form>
-                    <Form.Group className="mb-3" controlId="email">
+                    <Form.Group className="mb-3 " controlId="email">
                       <Form.Label>ایمیل</Form.Label>
-                      <Form.Control type="email" placeholder="ایمیل را وارد کنید" />
+                      <Form.Control type="email" className='back-color text-color' placeholder="ایمیل را وارد کنید" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="password">
                       <Form.Label>پسورد</Form.Label>
-                      <Form.Control type="text" placeholder="رمز را وارد کنید" />
+                      <Form.Control type="text" className='back-color text-color' placeholder="رمز را وارد کنید" />
                     </Form.Group>
                       <Form.Group
                         className="mb-3"
                         controlId="formBasicCheckbox"
                       ></Form.Group>
                       <div className="d-grid">
-                        <Button variant="primary" type="submit">
-                          Create Account
+                        <Button variant="primary" className='' type="submit">
+                          ورود
                         </Button>
                       </div>
                     </Form>

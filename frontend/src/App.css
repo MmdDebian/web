@@ -58,3 +58,26 @@
   max-width: 80% !important;
   width: 50%;
 }
+
+
+.header-start-div button{
+  padding: 10px 50px;
+  border-color:white;
+  border-radius: 15px;
+  margin: 0 15px;
+  background-color:transparent ;
+  color : white ;
+}
+
+
+.header-start-div input {
+  background-color: transparent;
+  padding: 10px 0px;
+  border-radius: 15px;
+  font-size: 20;
+  color: white;
+}
+
+.header-start-div button:hover {
+  background-color: #007AFC;
+}

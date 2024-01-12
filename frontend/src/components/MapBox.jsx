@@ -1,69 +1,60 @@
-
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { Col, Container, Row, Spinner } from 'react-bootstrap';
+import {Card, Col, Container, Row, Spinner } from 'react-bootstrap';
+import { location_data } from '../data';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibW9oYW1hZG1pcnphZWkiLCJhIjoiY2xyN3YwNHJzMHcwdzJpcDRtd2gyY2czdSJ9.qRpHoLZY-N8zC6Qi195mpw';
+
+const token = 'pk.eyJ1IjoibW9oYW1hZG1pcnphZWkiLCJhIjoiY2xyN3YwNHJzMHcwdzJpcDRtd2gyY2czdSJ9.qRpHoLZY-N8zC6Qi195mpw';
+
+mapboxgl.accessToken = token ; 
 mapboxgl.setRTLTextPlugin(
     'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
     null,
     true 
 );
 
-export const Map = () => {
+export default function MapBox(){
   const [loading , setLoading] = useState(false)
-  const [data , setData] = useState([])
+  const [location , setLocation] = useState()
+  const [value , setValue] = useState('')
 
-   useEffect(()=>{
-    setLoading(true);
-    const map = new mapboxgl.Map({
+  let map ; 
+
+  useEffect(()=>{
+    map = new mapboxgl.Map({
       container : 'map',
-      style: 'mapbox://styles/mapbox/outdoors-v12',
+      style: 'mapbox://styles/mapbox/dark-v11',
       center: {
         lat : 34.7983 , 
         lon : 48.5148
       }, 
-      zoom: 15})
+      zoom: 15
+    })
+  })
 
-      const marker1 = new mapboxgl.Marker({color:'red' , rotation:true})
-      .setLngLat([48.514813,34.798226])
 
-      .addTo(map);
-      
-      // Create a default Marker, colored black, rotated 45 degrees.
-      const marker2 = new mapboxgl.Marker({ color: 'red', rotation: 45 })
-      .setLngLat([48.509025 , 34.809037])
-      .addTo(map);
+  const onChangeHandler = (e) =>{
+    setValue(e.target.value)
+  }
 
-      const marker3 = new mapboxgl.Marker({color:'red', rotation : true})
-        .setLngLat([48.5166382, 34.807235])
-        .addTo(map)
-        .setPopup(
-          new mapboxgl.Popup({ offset: 25 }) 
-          .setHTML(
-          `<h3>موزه حکمتانه</h3><p>$test</p>`
-          )
-          
-        ).getElement().addEventListener('click' , (e)=>{
-          
+
+    const searchHander = ()=>{
+        const location = location_data.find(loc=>{
+            if(loc.name != value){
+                return null
+            }
+
+            return loc ;
+        });
+
+        setLocation(location)
+
+        location.tourist_location.map(loc=>{
+          new mapboxgl.Marker({color:'red'})
+            .setLngLat([loc.lon , loc.lat])
+            .addTo(map)
         })
-
-    
-      const marker4 = new mapboxgl.Marker({color:'red', rotation : true})
-      .setLngLat([48.5122353 ,  34.7983275])
-      .addTo(map)
-
-      setLoading(false)
-
-
-      const address = [
-        {
-          id : 1 , 
-          lngLat : [48.514813,34.798226] ,
-        
-        }
-      ]
-   })
+      }
 
     return (
       <>
@@ -82,10 +73,31 @@ export const Map = () => {
                 )
               }
             </Col>
-            <Col>
-              
-              <h1></h1>
-              <p></p>
+            <Col id="detail">
+              <div className="header-start-div">
+                  <input type="text" onChange={onChangeHandler} value={value}/>
+                  <button onClick={searchHander}>جست و جو </button>
+              </div>
+              {
+                location ? (
+                  <>
+                    {location.tourist_location.map(loc=>{
+                       <Card>
+                       <Card.Header>{loc.name}</Card.Header>
+                       <Card.Body>
+                           <Card.Title>{loc.name}</Card.Title>
+                           <Card.Text>
+                             {loc.description}
+                           </Card.Text>
+                           <link href='/' variant="primary">See details</link>
+                         </Card.Body>
+                       </Card>
+                    })}
+                  </>
+                ) : (
+                  <span></span>
+                )
+              }
             </Col>
           </Row>
         </Container>
