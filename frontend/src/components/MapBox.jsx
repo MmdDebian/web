@@ -40,7 +40,7 @@ export default function MapBox(){
 
     const searchHander = ()=>{
         const location = location_data.find(loc=>{
-            if(loc.name != value){
+            if(loc.name !== value){
                 return null
             }
 
@@ -48,7 +48,6 @@ export default function MapBox(){
         });
 
         setLocation(location)
-
         location.tourist_location.map(loc=>{
           new mapboxgl.Marker({color:'red'})
             .setLngLat([loc.lon , loc.lat])
@@ -81,7 +80,7 @@ export default function MapBox(){
               {
                 location ? (
                   <>
-                    {location.tourist_location.map(loc=>{
+                    {location.tourist_location.forEach((loc)=>{
                        <Card>
                        <Card.Header>{loc.name}</Card.Header>
                        <Card.Body>
